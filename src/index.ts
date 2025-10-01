@@ -27,3 +27,4 @@ app.use('/api/auth', authRoutes);
 app.use('/api/students', studentRoutes);
 app.use('/api/actions', actionRoutes);
 
+export default app;
