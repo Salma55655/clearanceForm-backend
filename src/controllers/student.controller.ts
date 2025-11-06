@@ -11,7 +11,7 @@ export const getAllStudents = async (req: any, res: any) => {
     } catch (error: any) {
         res.status(500).json({ message: error.message });
     }
-};
+}; 
 
 // Fix: Using `any` for req and res types to work around what appears to be a broken or conflicting Express type definition issue.
 export const getStudentById = async (req: any, res: any) => {
@@ -37,14 +37,14 @@ export const updateStudent = async (req: any, res: any) => {
 
 // Fix: Using `any` for req and res types to work around what appears to be a broken or conflicting Express type definition issue.
 export const createStudent = async (req: any, res: any) => {
-    const { firstName, lastName, studentId, dorm, advisor } = req.body;
+    const { firstName, lastName, studentId, dorm, advisor, password, email } = req.body;
     try {
         const subjectTeachers = await Staff.find({ role: Role.SubjectTeacher });
         const year = studentId.split('-')[1].substring(0,2);
         
         const newStudentData = {
             studentId,
-            email: `${firstName.charAt(0).toLowerCase()}${lastName.toLowerCase()}${year}@alastudents.org`,
+            email: `${email.toLowerCase()}`,
             name: `${firstName} ${lastName}`,
             role: Role.Student,
             hall: `${dorm} Dorm`,
@@ -52,7 +52,7 @@ export const createStudent = async (req: any, res: any) => {
             hallHeadName: advisor,
             books: [],
             fines: [],
-            password: `pass-${studentId.toLowerCase()}`,
+            password: `${password}`,
             subjectClearances: subjectTeachers.map(teacher => ({
                 // Fix: Removed 'as any' cast as 'teacher' is now correctly typed.
                 subjectName: teacher.subject || 'Unknown Subject',

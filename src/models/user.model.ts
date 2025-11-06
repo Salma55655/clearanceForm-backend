@@ -100,7 +100,7 @@ const baseUserSchema = new Schema<IUser>({
             delete ret.__v;
         }
     }
-});
+}); 
 
 // Fix: Cast models to resolve union type and fix "not callable" errors.
 export const User = (models.User as Model<IUser>) || model<IUser>('User', baseUserSchema);

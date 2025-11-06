@@ -19,7 +19,7 @@ export const login = async (req: any, res: any) => {
         if (role === Role.Student) {
             user = await Student.findOne({
                 role: role,
-                $or: [{ email: identifierLower }, { studentId: identifierLower }]
+                $or: [{ email: identifierLower }, { studentId: identifier }]
             });
         } else {
             user = await User.findOne({ email: identifierLower, role: role });
